@@ -28,7 +28,6 @@ flush_all <enter>
 Now the fun with Python using pylibmc http://sendapatch.se/projects/pylibmc/
 A script to load and retrieve data
 $ cat memcache_query.pylibmc.sh 
-#!/usr/bin/env python3# -*- coding: utf-8 -*-
 #
 # Connect to a memcached server over UDP, retrieve some keys
 import pylibmc
@@ -53,7 +52,6 @@ Searching the Internet confirmed my suspicion that udp support of the mylibmc wa
 Next wanted to try out Python’s socket module since simple TCP connections can be done from telnet.
 
 $ cat memcache_query.tcp.sh 
-#!/usr/bin/env python3# -*- coding: utf-8 -*-
 #
 # Connect to a memcached server over UDP, retrieve some keys
 import socket
