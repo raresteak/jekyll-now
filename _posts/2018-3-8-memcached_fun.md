@@ -28,6 +28,7 @@ flush_all <enter>
 Now the fun with Python using pylibmc http://sendapatch.se/projects/pylibmc/
 A script to load and retrieve data
 $ cat memcache_query.pylibmc.sh 
+'''python
 #
 #Connect to a memcached server over UDP, retrieve some keys
 import pylibmc
@@ -38,7 +39,7 @@ MEMCONN["myteststringkey"] = "The quick brown fox jumps over the lazy dog"
 
 RET_DATA = MEMCONN["myteststringkey"]
 print(RET_DATA)
-
+'''
 Running the program produced:
 Traceback (most recent call last):
   File "./memcache_query.pylibmc.sh", line 14, in <module>
@@ -52,7 +53,7 @@ Searching the Internet confirmed my suspicion that udp support of the mylibmc wa
 Next wanted to try out Python’s socket module since simple TCP connections can be done from telnet.
 
 $ cat memcache_query.tcp.sh 
-
+'''python
 #Connect to a memcached server over UDP, retrieve some keys
 import socket
 TCP_IP = "192.168.168.168"
@@ -68,7 +69,7 @@ sock.send(MESSAGE.encode('utf-8') )
 RESPONSE = sock.recv(BUFFER_SIZE)
 sock.close()
 print("Received..." + str(RESPONSE) )
-
+'''
 Basically a copy and paste from https://wiki.python.org/moin/TcpCommunication
 $ ./memcache_query.tcp.sh 
 Received...b'VALUE myteststringkey 1 58\r\n\x80\x04\x95/\x00\x00\x00\x00\x00\x00\x00\x8c+The quick brown fox jumps over the lazy dog\x94.\r\nEND\r\n'
@@ -88,8 +89,9 @@ add -U 0 to OPTIONS line /etc/sysconfig/memcached
 this option is documented in the memcached man page
 
 Iptables eample:
-firewall-cmd --new-zone=memchached –permanent
-firewall-cmd --zone=memcached –add-source=127.0.0.1/32 –permanent
-firewall-cmd --zone=memcached –add-source=10.10.10.10/32 –permanent
-firewall-cmd --zone=memcached –add-port=11211/tcp –permanent
-firewall-cmd --reload
+
+   firewall-cmd --new-zone=memchached –permanent
+   firewall-cmd --zone=memcached –add-source=127.0.0.1/32 –permanent
+   firewall-cmd --zone=memcached –add-source=10.10.10.10/32 –permanent
+   firewall-cmd --zone=memcached –add-port=11211/tcp –permanent
+   firewall-cmd --reload
