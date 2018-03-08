@@ -29,11 +29,11 @@ Now the fun with Python using pylibmc http://sendapatch.se/projects/pylibmc/
 A script to load and retrieve data
 $ cat memcache_query.pylibmc.sh 
 #
-# Connect to a memcached server over UDP, retrieve some keys
+#Connect to a memcached server over UDP, retrieve some keys
 import pylibmc
-# Setup connection
+#Setup connection
 MEMCONN = pylibmc.Client(["udp:192.168.168.168"])
-# Populate data with a key called myteststringkey
+#Populate data with a key called myteststringkey
 MEMCONN["myteststringkey"] = "The quick brown fox jumps over the lazy dog"
 
 RET_DATA = MEMCONN["myteststringkey"]
@@ -52,8 +52,8 @@ Searching the Internet confirmed my suspicion that udp support of the mylibmc wa
 Next wanted to try out Python’s socket module since simple TCP connections can be done from telnet.
 
 $ cat memcache_query.tcp.sh 
-#
-# Connect to a memcached server over UDP, retrieve some keys
+
+#Connect to a memcached server over UDP, retrieve some keys
 import socket
 TCP_IP = "192.168.168.168"
 TCP_PORT = 11211
@@ -64,7 +64,7 @@ sock = socket.socket(socket.AF_INET, # Internet
 		    socket.SOCK_STREAM) # TCP
 sock.connect((TCP_IP, TCP_PORT))
 sock.send(MESSAGE.encode('utf-8') )
-# If you don't add .encode() you get error TypeError: a bytes-like object is required, not 'str'
+#If you don't add .encode() you get error TypeError: a bytes-like object is required, not 'str'
 RESPONSE = sock.recv(BUFFER_SIZE)
 sock.close()
 print("Received..." + str(RESPONSE) )
@@ -82,7 +82,7 @@ Need to keep looking into this because the news of this was very interesting, so
 
 
 ###How to protect your exposed memcached server?    
-Simple.  By default it listens on both tcp and udp, disable listening on UDP if you absolutely don’t need it, which was the contributing factor to the DDOS attack.   Have it listen to loopback only, or configure host based firewall to only respond to queries from known machines.
+Simple.  By default it listens on both tcp and udp (Not in latest build). disable listening on UDP if you absolutely don’t need it, which was the contributing factor to the DDOS attack.   Have it listen to loopback only, or configure host based firewall to only respond to queries from known machines.
 Config change:
 add -U 0 to OPTIONS line /etc/sysconfig/memcached
 this option is documented in the memcached man page
