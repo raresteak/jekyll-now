@@ -28,7 +28,9 @@ flush_all <enter>
 Now the fun with Python using pylibmc http://sendapatch.se/projects/pylibmc/
 A script to load and retrieve data
 $ cat memcache_query.pylibmc.sh 
-'''python
+```python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 #
 #Connect to a memcached server over UDP, retrieve some keys
 import pylibmc
@@ -39,22 +41,26 @@ MEMCONN["myteststringkey"] = "The quick brown fox jumps over the lazy dog"
 
 RET_DATA = MEMCONN["myteststringkey"]
 print(RET_DATA)
-'''
+```
 Running the program produced:
+```python
 Traceback (most recent call last):
   File "./memcache_query.pylibmc.sh", line 14, in <module>
     RET_DATA = MEMCONN["myteststringkey"]
   File "/usr/local/lib/python3.5/dist-packages/pylibmc/client.py", line 158, in __getitem__
     value = self.get(key, _MISS_SENTINEL)
 pylibmc.NotSupportedError: error 28 from memcached_get(myteststringkey): (0x20f87a0) ACTION NOT SUPPORTED -> libmemcached/get.cc:216
-
+```
 Searching the Internet confirmed my suspicion that udp support of the mylibmc was not supported like the message says.   The module does support loading via UDP so my key was present in memcached when checking with telnet.
 
 Next wanted to try out Python’s socket module since simple TCP connections can be done from telnet.
 
 $ cat memcache_query.tcp.sh 
-'''python
-# Connect to a memcached server over UDP, retrieve some keys
+```python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+#Connect to a memcached server over UDP, retrieve some keys
 import socket
 TCP_IP = "192.168.168.168"
 TCP_PORT = 11211
@@ -69,11 +75,12 @@ sock.send(MESSAGE.encode('utf-8') )
 RESPONSE = sock.recv(BUFFER_SIZE)
 sock.close()
 print("Received..." + str(RESPONSE) )
-'''
+```
 Basically a copy and paste from https://wiki.python.org/moin/TcpCommunication
+```
 $ ./memcache_query.tcp.sh 
 Received...b'VALUE myteststringkey 1 58\r\n\x80\x04\x95/\x00\x00\x00\x00\x00\x00\x00\x8c+The quick brown fox jumps over the lazy dog\x94.\r\nEND\r\n'
-
+```
 None the less learned how to setup a TCP connection, send data, and catch the response.
 
 Also tried a UDP socket connection to send "get myteststringkey\r\n" but that was also handing.    Likewise $ echo "get myteststringkey\r\n" | nc 192.168.168.168 112211 was hanging.    
@@ -82,16 +89,17 @@ Need to keep looking into this because the news of this was very interesting, so
 
 
 
-###How to protect your exposed memcached server?    
+### How to protect your exposed memcached server?    
 Simple.  By default it listens on both tcp and udp (Not in latest build). disable listening on UDP if you absolutely don’t need it, which was the contributing factor to the DDOS attack.   Have it listen to loopback only, or configure host based firewall to only respond to queries from known machines.
 Config change:
 add -U 0 to OPTIONS line /etc/sysconfig/memcached
 this option is documented in the memcached man page
 
 Iptables eample:
-
+```
    firewall-cmd --new-zone=memchached –permanent
    firewall-cmd --zone=memcached –add-source=127.0.0.1/32 –permanent
    firewall-cmd --zone=memcached –add-source=10.10.10.10/32 –permanent
    firewall-cmd --zone=memcached –add-port=11211/tcp –permanent
    firewall-cmd --reload
+```
