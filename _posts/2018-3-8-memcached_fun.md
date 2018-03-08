@@ -1,6 +1,6 @@
-###Intro 
+### Intro 
 I wanted my first blog post to be about memcached since it’s been in the news recently with the recent largest DDOS attack ever orchestrated at 1.7 Tbps recently.  Play with with troublesome code and use Python to do it.   
-###Installation of memcached
+### Installation of memcached
 Step 1 install memcache on Centos in my lab.   Yum install memcached
 Step 2.   configure to listen on the non loopback.    Edit /etc/sysconfig/memcached OPTIONS line.  Add -l <IP>
 Step 3 start memcached, systemctl start memcached
@@ -24,7 +24,7 @@ get myteststringkey<enter>
 Hello World
 flush_all <enter>
 
-###Python fun
+### Python fun
 Now the fun with Python using pylibmc http://sendapatch.se/projects/pylibmc/
 A script to load and retrieve data
 $ cat memcache_query.pylibmc.sh 
@@ -54,7 +54,7 @@ Next wanted to try out Python’s socket module since simple TCP connections can
 
 $ cat memcache_query.tcp.sh 
 '''python
-#Connect to a memcached server over UDP, retrieve some keys
+# Connect to a memcached server over UDP, retrieve some keys
 import socket
 TCP_IP = "192.168.168.168"
 TCP_PORT = 11211
