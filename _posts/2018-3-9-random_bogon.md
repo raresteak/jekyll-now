@@ -9,15 +9,15 @@ Code snippet, full program in Git repo
 # Random Private IP generator
 # Needed for a later project
 import random
-# Randomly choose 10, 172 or 192
+# Randomly choose 10, 169, 172 or 192
 
 # Once chosen.  pick random octets within range
-CLASS = random.choice([10,172,192,169])
+RANGE = random.choice([10,172,192,169])
 
 # 10.0.0.1 - 10.255.255.254
-if CLASS == 10:
-    OCT1 = random.randrange(1,255)
+if RANGE == 10:
     OCT2 = random.randrange(1,255)
-    OCT3 = random.randrange(1,254)
-    print( str(CLASS) + "." + str(OCT1) + "." + str(OCT2) + "." + str(OCT3) )
+    OCT3 = random.randrange(1,255)
+    OCT4 = random.randrange(1,254)
+    print( str(RANGE) + "." + str(OCT2) + "." + str(OCT3) + "." + str(OCT4) )
 ```
