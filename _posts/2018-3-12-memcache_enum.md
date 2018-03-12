@@ -7,7 +7,7 @@ This time enumerate all key/value pairs from the memcache server.
 
 Sample output
 
-'''
+```
 STAT items:2:number 1
 STAT items:2:age 365
 STAT items:2:evicted 0
@@ -20,47 +20,47 @@ STAT items:2:expired_unfetched 0
 STAT items:2:evicted_unfetched 0
 ...
 END
-'''
+```
 
 2. Pull out the key number through regex, 
 
-''' 
+``` 
 'items:(\d):number'
-'''
+```
 
 3. Get key by name with 'stats cachedump <keynumber> 100
 
-'''
+```
 stats cachedump 4 100
 ITEM testkey2 [100 b; 1520852401 s]
 END
-'''
+```
 
 4. Get value of key.   This is not working from script.
 
-'''
+```
 get testkey2
 VALUE testkey2 1 100
 ��Y�UIf the code and the comments disagree, then both are probably wrong. -- Norm Schryer �.
 END
-'''
+```
 
 What comes out in the script is just END
 
 Script output.  
 
-'''
+```
 testkey1:b'END\r\n'
 testkey0:b'END\r\n'
 testkey2:b'END\r\n'
-'''
+```
 
 Need to figure out why the mult-line output is not being capture like it was in step 1 with the stats items command.
 
 Script memcache_query.tcp.enumerate.sh posted in github.    More to come.
 
 
-'''python
+```python
 #!/usr/bin/env python3
 #Connect to a memcached server and dump key value pairs
 
@@ -101,5 +101,4 @@ for KEYNUM in statsItemsRegex.findall(str(RESPONSE) ):
 	print(keyName[0] + ":" + str(RESPONSE3) )
 sock.shutdown(2)
 sock.close()
-
-'''
+```
