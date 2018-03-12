@@ -47,7 +47,7 @@ testkey2:b'END\r\n'
 '''
 Need to figure out why the mult-line output is not being capture like it was in step 1 with the stats items command.
 
-Script memcache_query.tcp.enumberate.sh posted in github.    More to come.
+Script memcache_query.tcp.enumerate.sh posted in github.    More to come.
 '''python
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
