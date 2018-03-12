@@ -50,7 +50,6 @@ Need to figure out why the mult-line output is not being capture like it was in 
 Script memcache_query.tcp.enumerate.sh posted in github.    More to come.
 '''python
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 #
 # Connect to a memcached server and dump key value pairs
 
