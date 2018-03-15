@@ -1,4 +1,4 @@
-# sqlite fun
+# 2018-3-15 sqlite fun
 Doing some playing today with sqlite3 module for an upcoming project idea.
 
 This link was very helpful, https://www.pythoncentral.io/introduction-to-sqlite-in-python/
