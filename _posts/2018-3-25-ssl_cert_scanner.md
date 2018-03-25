@@ -9,7 +9,8 @@ Worked for quite a bit today.   Got really bogged down by two challenges which I
 
 1. glob is not scanning the entire system during testing.   so placed a couple certs in current 
 working dir to get moving on program.
-2. The regex, oh my god.   Need to spend time on this.  Not working like I would like.
+2. The regex, oh my god.   Need to spend time on this.  Not working like I would like.    Only produced output from one of the two certs I was testing with even though the output of the openssl command looked nearly identical. I was only testing the regex against the second cert which coincidentally was the cert giving output from the regex.
+3. Did not place any ouput into the sqlite database, instead it went to stdout for testing.
 
 ```python
 #!/usr/bin/env python3
