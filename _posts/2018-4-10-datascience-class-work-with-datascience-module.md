@@ -8,7 +8,6 @@ Taking a class online
 # minard.py
 
 from datascience import *
-import numpy as np
 
 minard = Table.read_table('minard.csv')
 print("-------------------------------------------------------")
