@@ -10,13 +10,15 @@ https://www.python.org/downloads/windows/
 ```python
 pip --proxy proxy.net:8080 install --upgrade pip
 
-pip --proxy proxy.net:8080 install --user pyinstaller
+pip --proxy proxy.net:8080 install  pyinstaller
 
-pip --proxy proxy.net:8080 install --user pyperclip
+pip --proxy proxy.net:8080 install pyperclip
 
-pip --proxy proxy.net:8080 install --user datascience
+pip --proxy proxy.net:8080 install datascience
 
-pip --proxy proxy.net:8080 install --user pylint
+pip --proxy proxy.net:8080 install pylint
+
+pip --proxy proxy.net:8080 install fuckit
 ```
 
 ### Editors
